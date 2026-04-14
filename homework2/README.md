@@ -64,4 +64,5 @@ docker push 7195522/robo-homework:v1-golang-1.25-multistage
 <img width="1255" height="768" alt="image" src="https://github.com/user-attachments/assets/6eaa97cb-2c13-4288-959e-0e108e9e4e35" />
 
 Результат:
+
 <img width="1908" height="1041" alt="image" src="https://github.com/user-attachments/assets/ec838ce7-65c3-479c-a18d-5aeaefc889ba" />
