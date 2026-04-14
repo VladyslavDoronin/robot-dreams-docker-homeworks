@@ -40,3 +40,18 @@ docker inspect robo-homework:v1-golang-1.25-multistage --format='{{.Config.User}
 Пояснення як мультістедж зменшив розмір образу: Мультистедж дозволяє виключити інструменти сборки, залежності з фінального образу і бере лише готовий вже зібраний бінарник. В моєму випадку, все що відноситься до build до строки FROM scratch AS runtime, не попаде в фінальний образ. Звідти ми беремо лише готовий бінарник miniSite та копіюємо його в порожню систему scratch. Ну і усе що є в образі golang:1.25 не потрапить в фінальний образ, що добре зменшує розмір.
 
 Щодо змін в go.mod: змінив версію go, а ось для gorilla/mux вже не можу змінити(понизити). Починає ругатися. Підозрюю, що тут ще є залежність від go.sum.
+
+
+Завантажити образ у власний реєстр (Docker Hub/GHCR) і запустити його з реєстру (опціонально)
+За допомогою цих команд завантажую мій образ до мого докерХабу:
+docker tag robo-homework:v1-golang-1.25-multistage 7195522/robo-homework:v1-golang-1.25-multistage
+docker push 7195522/robo-homework:v1-golang-1.25-multistage
+<img width="839" height="178" alt="image" src="https://github.com/user-attachments/assets/c4a6498d-193d-452f-b5c7-9d73cf417107" />
+
+<img width="1907" height="858" alt="image" src="https://github.com/user-attachments/assets/8817f074-275c-40fc-b20b-1b89d816c9b2" />
+
+Для чистоти видаляю образ зі свого ПК і пробую запустити. Як видно на наступному скрині, мій образ качається з ДокерХаба і потім запускається
+<img width="1255" height="768" alt="image" src="https://github.com/user-attachments/assets/6eaa97cb-2c13-4288-959e-0e108e9e4e35" />
+
+Результат:
+<img width="1908" height="1041" alt="image" src="https://github.com/user-attachments/assets/ec838ce7-65c3-479c-a18d-5aeaefc889ba" />
