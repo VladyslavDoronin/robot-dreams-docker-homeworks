@@ -1,0 +1,19 @@
+services:
+  course-app:
+    build: ./course-app
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      APP_MESSAGE: "Hello. This is my homework 3"
+      APP_STORE: redis
+      APP_REDIS_URL: "redis://PASSWORD!!!@redis-10085.c279.us-central1-1.gce.cloud.redislabs.com:10085"
+
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:8.6
+    ports:
+      - "10085:10085"
