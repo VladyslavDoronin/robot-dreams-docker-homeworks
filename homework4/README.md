@@ -62,3 +62,19 @@
 <img width="1917" height="1080" alt="image" src="https://github.com/user-attachments/assets/361f9bfe-ee21-4cce-967d-7499df1f82e0" />
 
 
+## Запустити Docker в swarm режимі
+
+<img width="1919" height="1080" alt="image" src="https://github.com/user-attachments/assets/2e2823ee-66a8-4bf6-aae6-e63fa978ec18" />
+
+
+Для того, щоб запрацював docker stack deploy довелось трішки переписати докер компоуз. Збилдив докерфайл, запушил на мій докер репозиторій і вже його використовував. Так як деплой стек не працює з командою build, а ще працюэ лише з укороченым depends_on
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c9868cff-57fe-493a-840f-a01c24b0af4d" />
+<img width="733" height="473" alt="image" src="https://github.com/user-attachments/assets/a4425052-a2d9-47d8-b40d-c9b6f7dbfb9b" />
+
+
+Також прописав порти в докер компоуз файлі target: 8080 та published: 8080, щоб мав змогу з мого компьютера зайти на сайт. А то було, що сервіси підняті, healthcheck пройшли успішно, а з компа свого зайти не міг. Виявилось це проблема wsl на windows і треба явно указати порти
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8e40b9d6-07ee-45f1-a9fa-a6311d452672" />
+
+
