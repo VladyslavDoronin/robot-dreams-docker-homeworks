@@ -31,14 +31,17 @@
 
 І так, додаємо томи:
 
-<img width="1006" height="1021" alt="image" src="https://github.com/user-attachments/assets/50471040-138d-444e-a169-b879c181c60b" />
+<img width="984" height="925" alt="image" src="https://github.com/user-attachments/assets/d206c1d9-4f2b-4d68-928d-de0e4e039a01" />
 
 В ранчері бачимо, що томи створились:
 
-<img width="1266" height="713" alt="image" src="https://github.com/user-attachments/assets/cd4e7cc6-f8d8-41fc-9970-479865fc41fa" />
+
+<img width="1266" height="713" alt="image" src="https://github.com/user-attachments/assets/bf43eb14-9a00-4144-b5fc-f17400ff0913" />
+
 
 Також можно вивести створенні волуми командою:
-<img width="703" height="208" alt="image" src="https://github.com/user-attachments/assets/b740528c-022c-4e01-90fa-8b1197b0855f" />
+
+<img width="683" height="153" alt="image" src="https://github.com/user-attachments/assets/35d3602e-b7e3-45b4-ad1d-539963dccf13" />
 
 
 Перевіряємо лічильник відвідувань між перезапусками контейнера:
@@ -46,7 +49,12 @@
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4869d457-d57e-419f-a2a7-42c23bf4a6cb" />
 <img width="1908" height="1066" alt="image" src="https://github.com/user-attachments/assets/662504cd-0ddd-474a-be75-8b64eb94f177" />
 
+
 Як бачимо, дані зберігаються і підтягуються з волумів після docker compose down та docker compose up.
+
+Також можно підключитись до запущеного контейнера і побачити бд редіса:
+
+<img width="782" height="122" alt="image" src="https://github.com/user-attachments/assets/89f7ef4c-6446-4338-a717-b975a8a115bf" />
 
 
 По залежностям та порядку запуску: через depends_on додаток очікую спочатку щоб редіс був доступнім, щоб пройшов свій healthcheck і лише після цього запускаєтсья додаток:
