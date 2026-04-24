@@ -36,3 +36,13 @@
 
 <img width="494" height="1080" alt="image" src="https://github.com/user-attachments/assets/05724689-31de-4cc7-b06f-46b6a89ca23c" />
 
+
+## Змінити кількість реплік у deployment.yaml, передеплоїти та подивитися на процес оновлення (kubectl rollout status deployment/<NAME>)
+Змынив кількість реплік для додатку на 5 та передеплоїв. Як видно на скрині, пілся передеплою, створилось теперь 5 подів. Також kubectl rollout status показав, що деплоймент пройшов успішно.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/33e0fa8e-1c05-400b-b81a-d2b6dcb11695" />
+
+
+Також видно, що використовуються різні поди:
+
+<img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/f55b06fe-f4d2-49ac-81f8-cc309e6a5f98" />
