@@ -19,13 +19,34 @@ spec:
             - containerPort: 8080
           env:
             - name: APP_MESSAGE
-              value: "Hello. This is my homework 6"
+              value: "Hello. This is my homework 7"
             - name: APP_STORE
               value: "redis"
             - name: APP_REDIS_URL
               value: "redis://redis:6379/0"
+          livenessProbe:
+            httpGet:
+              path: /healthz 
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 5 
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 2
+            successThreshold: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1 
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,3 +67,16 @@ spec:
           image: redis:8.6
           ports:
             - containerPort: 6379
+          
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            failureThreshold: 3
+
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
