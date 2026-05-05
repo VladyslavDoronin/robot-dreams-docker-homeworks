@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: course-app
 spec:
-  replicas: 5
+  replicas: 11
   selector:
     matchLabels:
       app: course-app
@@ -19,11 +19,13 @@ spec:
             - containerPort: 8080
           env:
             - name: APP_MESSAGE
-              value: "Hello. This is my homework 5"
+              value: "Hello. This is my homework 6"
             - name: APP_STORE
               value: "redis"
             - name: APP_REDIS_URL
               value: "redis://redis:6379/0"
+  strategy:
+    type: Recreate
 ---
 apiVersion: apps/v1
 kind: Deployment
