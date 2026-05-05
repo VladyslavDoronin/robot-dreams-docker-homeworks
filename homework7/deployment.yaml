@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: course-app
+spec:
+  replicas: 11
+  selector:
+    matchLabels:
+      app: course-app
+  template:
+    metadata:
+      labels:
+        app: course-app
+    spec:
+      containers:
+        - name: course-app
+          image: 7195522/homwork5:v1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_MESSAGE
+              value: "Hello. This is my homework 6"
+            - name: APP_STORE
+              value: "redis"
+            - name: APP_REDIS_URL
+              value: "redis://redis:6379/0"
+  strategy:
+    type: Recreate
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:8.6
+          ports:
+            - containerPort: 6379
