@@ -46,3 +46,21 @@ livenessProbe перевіряє чи контейнер живий. Якщо н
 
 ### Zero Downtime Test:
 #### Зімітуйте ситуацію, коли один із подів стає "не готовим" (failed readiness check), але продовжує працювати. Переконайтеся за допомогою інструментів CLI (kubectl), що IP-адреса цього поду коректно зникає зі списку Endpoints відповідного сервісу, а трафік перенаправляється на інші репліки
+
+Для того щоб зімітувати що один з подів впав, зайдем на нього на вб'ємо процес. На скрині одразу 3 термінали відкрив, щоб було видно які команди виконую та як змінюється статус впавшого пода, і як пропадае один з ендпоінтів нашого сервісу:
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bd3da6a1-cedd-4fb0-bb47-1ce385e95531" />
+
+<img width="1920" height="937" alt="image" src="https://github.com/user-attachments/assets/2945b094-e9e9-4e78-8cb0-24613a188364" />
+
+### HTTPS (Optional / Advanced):
+#### Налаштуйте Ingress для роботи через HTTPS, використовуючи самопідписаний сертифікат або дефолтний сертифікат Ingress контролера. Забезпечте TLS termination на рівні Ingress 5.
+
+Створив самоподпісні tls ключі на своїй лінуховій машині:
+
+<img width="661" height="346" alt="image" src="https://github.com/user-attachments/assets/5179cb56-b5b2-4f96-8eea-5278f1decafe" />
+
+
+Перекинув ці ключі до нашого дз та створив секрет.  Дописав новий ресурс до інгресу з підключенням секрету та зааплаів зміни. Тепер ми маємо доступ до стайту як по http так і по https
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0e7d760f-9e4d-44d4-b24d-c7c81c2d3628" />
