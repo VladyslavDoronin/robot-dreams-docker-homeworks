@@ -1,0 +1,55 @@
+services:
+  course-app:
+    image: 7195522/homework4:v1
+    # build: ./course-app
+    # container_name: course-app
+
+    ports:
+    - target: 8080
+      published: 8080
+      mode: host
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+    environment:
+      APP_MESSAGE: "Hello. This is my homework 4"
+      APP_STORE: redis
+      # APP_REDIS_URL: "redis://PASSWORD!!!@redis-10085.c279.us-central1-1.gce.cloud.redislabs.com:10085"
+      APP_REDIS_URL: "redis://redis:6379/0"
+
+    volumes:
+      - appdata:/data
+
+    # depends_on:
+    #   redis:
+    #     condition: service_healthy
+
+    depends_on:
+       - redis
+
+  redis:
+    image: redis:8.6
+    container_name: redis-app
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  appdata:
+    name: appdata-volume
+  redis_data:
+    name: redis-data-volume
