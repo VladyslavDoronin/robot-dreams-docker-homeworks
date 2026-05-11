@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: course-app-config
+data:
+  APP_NAME: "Course App UPDATE 34"
+  APP_MESSAGE: "Hello. This is my homework 6"
+  APP_LOG_LEVEL: "info"
+  APP_TIMEOUT: "3s"
