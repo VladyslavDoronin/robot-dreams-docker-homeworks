@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: course-app
 spec:
-  replicas: 11
+  replicas: 3
   selector:
     matchLabels:
       app: course-app
@@ -19,11 +19,11 @@ spec:
             - containerPort: 8080
           env:
             - name: APP_MESSAGE
-              value: "Hello. This is my homework 7"
+              value: "Hello. This is my homework 8"
             - name: APP_STORE
               value: "redis"
             - name: APP_REDIS_URL
-              value: "redis://redis:6379/0"
+              value: "redis://redis:6379"
           livenessProbe:
             httpGet:
               path: /healthz 
@@ -47,36 +47,36 @@ spec:
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: redis
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: redis
-  template:
-    metadata:
-      labels:
-        app: redis
-    spec:
-      containers:
-        - name: redis
-          image: redis:8.6
-          ports:
-            - containerPort: 6379
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: redis
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: redis
+#   template:
+#     metadata:
+#       labels:
+#         app: redis
+#     spec:
+#       containers:
+#         - name: redis
+#           image: redis:8.6
+#           ports:
+#             - containerPort: 6379
           
-          livenessProbe:
-            tcpSocket:
-              port: 6379
-            initialDelaySeconds: 10
-            periodSeconds: 15
-            failureThreshold: 3
+#           livenessProbe:
+#             tcpSocket:
+#               port: 6379
+#             initialDelaySeconds: 10
+#             periodSeconds: 15
+#             failureThreshold: 3
 
-          readinessProbe:
-            exec:
-              command:
-                - redis-cli
-                - ping
+#           readinessProbe:
+#             exec:
+#               command:
+#                 - redis-cli
+#                 - ping
