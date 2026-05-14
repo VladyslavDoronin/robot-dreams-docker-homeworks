@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "course-app.fullname" . }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "course-app.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "course-app.fullname" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag}}"
+          ports:
+            - containerPort: {{ .Values.app.service.port }}
+          {{- with .Values.app.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.app.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.app.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env:
+            - name: APP_MESSAGE
+              value: {{ .Values.app.env.appMessage | quote }}
+            - name: APP_STORE
+              value: {{ .Values.app.env.appStore | quote }}
+            - name: APP_REDIS_URL
+              value: {{ .Values.app.env.redisUrl | quote }}
+              # value: "redis://{{ include "course-app.fullname" . }}-redis:{{ .Values.redis.service.port }}"
+          
