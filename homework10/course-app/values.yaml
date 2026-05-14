@@ -18,7 +18,7 @@ app:
   env:
     appMessage: "Hello. This is my homework 10"
     appStore: "redis"
-    redisUrl: "redis://my-redis-master:6379"
+    redisUrl: "redis://dragonfly:6379"
     
   livenessProbe:
     httpGet:
