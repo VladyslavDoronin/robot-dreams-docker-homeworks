@@ -1,0 +1,62 @@
+app:
+  replicaCount: 3
+
+  image:
+    repository: 7195522/homwork5
+    pullPolicy: IfNotPresent
+    tag: "v1"
+
+  service:
+    type: ClusterIP
+    port: 8080
+
+  resources:
+      limits:
+        cpu: "100m"
+        memory: "128Mi"
+  
+  env:
+    appMessage: "Hello. This is my homework 10"
+    appStore: "redis"
+    redisUrl: "redis://dragonfly:6379"
+    
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 10
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 3
+ 
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 2
+    successThreshold: 1
+        
+# --- Redis ---
+redis:
+  image:
+    repository: redis
+    tag: "7-alpine"
+ 
+  service:
+    port: 6379
+ 
+  storage:
+    size: 1Gi
+
+# --- Ingress ---
+ingress:
+  enabled: true
+  hosts:
+    - host: course-app.localhost
+      paths:
+        - path: /
+  tls: 
+     - secretName: course-app-tls
